@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "fund_collections",
+  "info": {
+    "singularName": "fund-collection",
+    "pluralName": "fund-collections",
+    "displayName": "Fund Collection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "organizations": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::organization.organization",
+      "mappedBy": "fund_collection"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "blocks",
+      "required": true
+    },
+    "totalGoal": {
+      "type": "integer"
+    },
+    "requisites": {
+      "type": "dynamiczone",
+      "components": [
+        "requisites.credit-card",
+        "requisites.monobanka",
+        "requisites.requisites",
+        "requisites.cryptocurrency"
+      ]
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::category.category",
+      "inversedBy": "fund_collections"
+    },
+    "collectedAmount": {
+      "type": "decimal"
+    }
+  }
+}

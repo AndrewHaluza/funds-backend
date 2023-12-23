@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_requisites_credit_cards",
+  "info": {
+    "displayName": "Credit Card",
+    "icon": "plus",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "bankDisplayName": {
+      "type": "string",
+      "required": true
+    },
+    "creditCardNumber": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

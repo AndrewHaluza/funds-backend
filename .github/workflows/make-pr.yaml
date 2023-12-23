@@ -81,9 +81,6 @@ jobs:
             });
             const labels = [prTag, 'automated pr'];
 
-            if (ticketNumber){
-              labels.push(ticketNumber);
-            }
 
             github.rest.issues.addLabels({
               owner,
