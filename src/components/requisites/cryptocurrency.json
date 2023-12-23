@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_requisites_cryptocurrencies",
+  "info": {
+    "displayName": "Cryptocurrency",
+    "icon": "plus"
+  },
+  "options": {},
+  "attributes": {
+    "cryptocurrencyDisplayName": {
+      "type": "string"
+    },
+    "walletAddress": {
+      "type": "string"
+    }
+  }
+}
