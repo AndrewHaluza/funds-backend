@@ -410,9 +410,9 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    organizations: Attribute.Relation<
+    organization: Attribute.Relation<
       'api::fund-collection.fund-collection',
-      'oneToMany',
+      'manyToOne',
       'api::organization.organization'
     >;
     title: Attribute.String & Attribute.Required;
@@ -469,15 +469,15 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
         maxLength: 160;
       }>;
     image: Attribute.Media;
-    fund_collection: Attribute.Relation<
-      'api::organization.organization',
-      'manyToOne',
-      'api::fund-collection.fund-collection'
-    >;
     user: Attribute.Relation<
       'api::organization.organization',
       'oneToOne',
       'plugin::users-permissions.user'
+    >;
+    fund_collections: Attribute.Relation<
+      'api::organization.organization',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
