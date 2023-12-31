@@ -12,11 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "organizations": {
+    "organization": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::organization.organization",
-      "mappedBy": "fund_collection"
+      "inversedBy": "fund_collections"
     },
     "title": {
       "type": "string",

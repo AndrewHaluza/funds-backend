@@ -26,16 +26,16 @@
         "images"
       ]
     },
-    "fund_collection": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::fund-collection.fund-collection",
-      "inversedBy": "organizations"
-    },
     "user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
+      "mappedBy": "organization"
+    },
+    "fund_collections": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::fund-collection.fund-collection",
       "mappedBy": "organization"
     }
   }
