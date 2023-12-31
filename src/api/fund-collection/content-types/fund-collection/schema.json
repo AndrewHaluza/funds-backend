@@ -22,10 +22,6 @@
       "type": "string",
       "required": true
     },
-    "description": {
-      "type": "blocks",
-      "required": true
-    },
     "totalGoal": {
       "type": "integer"
     },
@@ -46,6 +42,9 @@
     },
     "collectedAmount": {
       "type": "decimal"
+    },
+    "description": {
+      "type": "richtext"
     }
   }
 }
