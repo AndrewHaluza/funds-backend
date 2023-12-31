@@ -416,7 +416,6 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
       'api::organization.organization'
     >;
     title: Attribute.String & Attribute.Required;
-    description: Attribute.Blocks & Attribute.Required;
     totalGoal: Attribute.Integer;
     requisites: Attribute.DynamicZone<
       [
@@ -432,6 +431,7 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
       'api::category.category'
     >;
     collectedAmount: Attribute.Decimal;
+    description: Attribute.RichText;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
