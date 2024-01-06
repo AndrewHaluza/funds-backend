@@ -926,6 +926,11 @@ export interface ApiRequisiteRequisite extends Schema.CollectionType {
     >;
     owner: Attribute.String;
     value: Attribute.String;
+    requisite_type: Attribute.Relation<
+      'api::requisite.requisite',
+      'manyToOne',
+      'api::requisite-type.requisite-type'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -958,6 +963,11 @@ export interface ApiRequisiteTypeRequisiteType extends Schema.CollectionType {
   attributes: {
     displayName: Attribute.String;
     icon: Attribute.Media;
+    requisites: Attribute.Relation<
+      'api::requisite-type.requisite-type',
+      'oneToMany',
+      'api::requisite.requisite'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
