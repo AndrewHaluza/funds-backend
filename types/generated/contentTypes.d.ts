@@ -925,6 +925,7 @@ export interface ApiRequisiteRequisite extends Schema.CollectionType {
       'api::fund-collection.fund-collection'
     >;
     owner: Attribute.String;
+    value: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
