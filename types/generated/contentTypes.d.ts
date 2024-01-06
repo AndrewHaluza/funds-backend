@@ -827,14 +827,6 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
     >;
     title: Attribute.String & Attribute.Required;
     totalGoal: Attribute.Integer;
-    requisites: Attribute.DynamicZone<
-      [
-        'requisites.credit-card',
-        'requisites.monobanka',
-        'requisites.requisites',
-        'requisites.cryptocurrency'
-      ]
-    >;
     category: Attribute.Relation<
       'api::fund-collection.fund-collection',
       'manyToOne',
@@ -842,6 +834,11 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
     >;
     collectedAmount: Attribute.Decimal;
     description: Attribute.Blocks;
+    requisites: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'manyToMany',
+      'api::requisite.requisite'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -907,6 +904,75 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
   };
 }
 
+export interface ApiRequisiteRequisite extends Schema.CollectionType {
+  collectionName: 'requisites';
+  info: {
+    singularName: 'requisite';
+    pluralName: 'requisites';
+    displayName: 'Requisite';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    document: Attribute.Media;
+    fund_collections: Attribute.Relation<
+      'api::requisite.requisite',
+      'manyToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    owner: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::requisite.requisite',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::requisite.requisite',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRequisiteTypeRequisiteType extends Schema.CollectionType {
+  collectionName: 'requisite_types';
+  info: {
+    singularName: 'requisite-type';
+    pluralName: 'requisite-types';
+    displayName: 'Requisite Type';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    displayName: Attribute.String;
+    icon: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::requisite-type.requisite-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::requisite-type.requisite-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -928,6 +994,8 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::fund-collection.fund-collection': ApiFundCollectionFundCollection;
       'api::organization.organization': ApiOrganizationOrganization;
+      'api::requisite.requisite': ApiRequisiteRequisite;
+      'api::requisite-type.requisite-type': ApiRequisiteTypeRequisiteType;
     }
   }
 }

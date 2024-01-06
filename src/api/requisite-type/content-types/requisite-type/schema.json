@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "requisite_types",
+  "info": {
+    "singularName": "requisite-type",
+    "pluralName": "requisite-types",
+    "displayName": "Requisite Type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "displayName": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

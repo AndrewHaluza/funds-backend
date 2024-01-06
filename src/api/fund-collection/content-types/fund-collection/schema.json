@@ -25,15 +25,6 @@
     "totalGoal": {
       "type": "integer"
     },
-    "requisites": {
-      "type": "dynamiczone",
-      "components": [
-        "requisites.credit-card",
-        "requisites.monobanka",
-        "requisites.requisites",
-        "requisites.cryptocurrency"
-      ]
-    },
     "category": {
       "type": "relation",
       "relation": "manyToOne",
@@ -45,6 +36,12 @@
     },
     "description": {
       "type": "blocks"
+    },
+    "requisites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::requisite.requisite",
+      "inversedBy": "fund_collections"
     }
   }
 }
