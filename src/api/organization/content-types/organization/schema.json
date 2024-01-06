@@ -37,6 +37,10 @@
       "relation": "oneToMany",
       "target": "api::fund-collection.fund-collection",
       "mappedBy": "organization"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name"
     }
   }
 }
