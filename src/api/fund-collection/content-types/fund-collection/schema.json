@@ -42,6 +42,10 @@
       "relation": "manyToMany",
       "target": "api::requisite.requisite",
       "inversedBy": "fund_collections"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
     }
   }
 }

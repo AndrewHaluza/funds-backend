@@ -839,6 +839,7 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
       'manyToMany',
       'api::requisite.requisite'
     >;
+    slug: Attribute.UID<'api::fund-collection.fund-collection', 'title'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -886,6 +887,7 @@ export interface ApiOrganizationOrganization extends Schema.CollectionType {
       'oneToMany',
       'api::fund-collection.fund-collection'
     >;
+    slug: Attribute.UID<'api::organization.organization', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -923,6 +925,7 @@ export interface ApiRequisiteRequisite extends Schema.CollectionType {
       'api::fund-collection.fund-collection'
     >;
     owner: Attribute.String;
+    value: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

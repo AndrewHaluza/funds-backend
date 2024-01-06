@@ -28,6 +28,9 @@
     },
     "owner": {
       "type": "string"
+    },
+    "value": {
+      "type": "string"
     }
   }
 }
