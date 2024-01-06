@@ -22,6 +22,12 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "requisites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::requisite.requisite",
+      "mappedBy": "requisite_type"
     }
   }
 }

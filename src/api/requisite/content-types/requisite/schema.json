@@ -31,6 +31,12 @@
     },
     "value": {
       "type": "string"
+    },
+    "requisite_type": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::requisite-type.requisite-type",
+      "inversedBy": "requisites"
     }
   }
 }
