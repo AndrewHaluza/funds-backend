@@ -362,141 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
-  info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    displayName: Attribute.String;
-    icon: Attribute.Media;
-    fund_collections: Attribute.Relation<
-      'api::category.category',
-      'oneToMany',
-      'api::fund-collection.fund-collection'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::category.category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
-  collectionName: 'fund_collections';
-  info: {
-    singularName: 'fund-collection';
-    pluralName: 'fund-collections';
-    displayName: 'Fund Collection';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    organization: Attribute.Relation<
-      'api::fund-collection.fund-collection',
-      'manyToOne',
-      'api::organization.organization'
-    >;
-    title: Attribute.String & Attribute.Required;
-    totalGoal: Attribute.Integer;
-    requisites: Attribute.DynamicZone<
-      [
-        'requisites.credit-card',
-        'requisites.monobanka',
-        'requisites.requisites',
-        'requisites.cryptocurrency'
-      ]
-    >;
-    category: Attribute.Relation<
-      'api::fund-collection.fund-collection',
-      'manyToOne',
-      'api::category.category'
-    >;
-    collectedAmount: Attribute.Decimal;
-    description: Attribute.RichText;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::fund-collection.fund-collection',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::fund-collection.fund-collection',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiOrganizationOrganization extends Schema.CollectionType {
-  collectionName: 'organizations';
-  info: {
-    singularName: 'organization';
-    pluralName: 'organizations';
-    displayName: 'Organization';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        minLength: 2;
-        maxLength: 160;
-      }>;
-    image: Attribute.Media;
-    user: Attribute.Relation<
-      'api::organization.organization',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    fund_collections: Attribute.Relation<
-      'api::organization.organization',
-      'oneToMany',
-      'api::fund-collection.fund-collection'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::organization.organization',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::organization.organization',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -907,6 +772,141 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    displayName: Attribute.String;
+    icon: Attribute.Media;
+    fund_collections: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
+  collectionName: 'fund_collections';
+  info: {
+    singularName: 'fund-collection';
+    pluralName: 'fund-collections';
+    displayName: 'Fund Collection';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    organization: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'manyToOne',
+      'api::organization.organization'
+    >;
+    title: Attribute.String & Attribute.Required;
+    totalGoal: Attribute.Integer;
+    requisites: Attribute.DynamicZone<
+      [
+        'requisites.credit-card',
+        'requisites.monobanka',
+        'requisites.requisites',
+        'requisites.cryptocurrency'
+      ]
+    >;
+    category: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'manyToOne',
+      'api::category.category'
+    >;
+    collectedAmount: Attribute.Decimal;
+    description: Attribute.Blocks;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrganizationOrganization extends Schema.CollectionType {
+  collectionName: 'organizations';
+  info: {
+    singularName: 'organization';
+    pluralName: 'organizations';
+    displayName: 'Organization';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 160;
+      }>;
+    image: Attribute.Media;
+    user: Attribute.Relation<
+      'api::organization.organization',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    fund_collections: Attribute.Relation<
+      'api::organization.organization',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::organization.organization',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::organization.organization',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -917,9 +917,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::category.category': ApiCategoryCategory;
-      'api::fund-collection.fund-collection': ApiFundCollectionFundCollection;
-      'api::organization.organization': ApiOrganizationOrganization;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -928,6 +925,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::category.category': ApiCategoryCategory;
+      'api::fund-collection.fund-collection': ApiFundCollectionFundCollection;
+      'api::organization.organization': ApiOrganizationOrganization;
     }
   }
 }
