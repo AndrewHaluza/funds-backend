@@ -840,6 +840,7 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
       'api::requisite.requisite'
     >;
     slug: Attribute.UID<'api::fund-collection.fund-collection', 'title'>;
+    image: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
