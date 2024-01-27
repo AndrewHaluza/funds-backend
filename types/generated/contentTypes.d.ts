@@ -819,29 +819,66 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
     organization: Attribute.Relation<
       'api::fund-collection.fund-collection',
       'manyToOne',
       'api::organization.organization'
     >;
-    title: Attribute.String & Attribute.Required;
-    totalGoal: Attribute.Integer;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    totalGoal: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     category: Attribute.Relation<
       'api::fund-collection.fund-collection',
       'manyToOne',
       'api::category.category'
     >;
-    collectedAmount: Attribute.Decimal;
-    description: Attribute.Blocks;
+    collectedAmount: Attribute.Decimal &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     requisites: Attribute.Relation<
       'api::fund-collection.fund-collection',
       'manyToMany',
       'api::requisite.requisite'
     >;
     slug: Attribute.UID<'api::fund-collection.fund-collection', 'title'>;
-    image: Attribute.Media & Attribute.Required;
-    documents: Attribute.Media;
+    image: Attribute.Media &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    documents: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -857,6 +894,12 @@ export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    locale: Attribute.String;
   };
 }
 
