@@ -21,6 +21,8 @@ ENV PORT 80
 ARG SERVER_URL=http://localhost:1337
 ENV SERVER_URL=${SERVER_URL}
 
+RUN npm install
+
 RUN npm run build
 
 
