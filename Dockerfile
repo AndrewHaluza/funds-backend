@@ -10,7 +10,6 @@ RUN apk add --update \
 WORKDIR /usr/src/app
 
 ADD package.json package-lock.json
-# RUN npm install
 
 # Bundle app source
 ADD . /usr/src/app/
@@ -22,7 +21,8 @@ ARG SERVER_URL=http://localhost:1337
 ENV SERVER_URL=${SERVER_URL}
 
 RUN npm install
-
+RUN npm install --platform=linuxmusl --arch=x64 sharp
+# RUN npm cache clean sqlite3
 RUN npm run build
 
 
@@ -42,10 +42,12 @@ ARG SERVER_URL=http://localhost:1337
 ENV SERVER_URL=${SERVER_URL}
 
 WORKDIR /usr/src/app
+
 COPY --from=builder /usr/src/app/package.json /usr/src/app/package-lock.json ./
 COPY --from=builder /usr/src/app/node_modules ./node_modules/
-COPY --from=builder /usr/src/app/ .
+COPY --from=builder /usr/src/app/ ./
 
 EXPOSE 80
+
 
 CMD node ./server.js -p 80
