@@ -16,3 +16,5 @@ services:
       - "3000:3000"
     volumes:
       - .:/app/frontend
+    environment:
+      SERVER_URL: https://funds-be.ndtech.cloud
