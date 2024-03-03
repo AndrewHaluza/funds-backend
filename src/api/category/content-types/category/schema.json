@@ -4,7 +4,8 @@
   "info": {
     "singularName": "category",
     "pluralName": "categories",
-    "displayName": "Category"
+    "displayName": "Category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,17 +16,21 @@
       "type": "string"
     },
     "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "fund_collections": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::fund-collection.fund-collection",
       "mappedBy": "category"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }
