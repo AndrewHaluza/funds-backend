@@ -1,20 +1,19 @@
 version: '3'
 services:
   backend:
-    build: .
     container_name: backend
+    image: registry.ndtech.cloud/funds-backend:latest
     restart: always
     ports:
       - "1337:1337"
     volumes:
       - .:/app/backend
   frontend:
-    build: ../donatello/
     container_name: frontend
+    image: registry.ndtech.cloud/funds-frontend:latest
+    build: ../donatello/
     restart: always
     ports:
       - "3000:3000"
     volumes:
       - .:/app/frontend
-    environment:
-      SERVER_URL: https://funds-be.ndtech.cloud
