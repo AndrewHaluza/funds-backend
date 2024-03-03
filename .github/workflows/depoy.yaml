@@ -27,11 +27,11 @@ jobs:
         push: true
         tags: ${{ vars.DOCKER_REGISTRY_URL }}/${{ vars.DOCKER_REGISTRY_USERNAME }}/backend:latest
 
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-    - name: Deploy to Server
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ vars.SSH_USERNAME }}@${{ vars.SSH_IP }} "docker pull ${{ vars.DOCKER_REGISTRY_URL }}/${{ vars.DOCKER_REGISTRY_USERNAME }}/backend:latest && docker run -d -p 1337:1337 ${{ vars.DOCKER_REGISTRY_URL }}/${{ vars.DOCKER_REGISTRY_USERNAME }}/backend:latest"
+    - name: Execute remote SSH commands (rebuild)
+      uses: appleboy/ssh-action@v1.0.3
+      with:    
+        host: ${{ secrets.SSH_IP }}
+        username: ${{ secrets.SSH_USERNAME }}
+        port: ${{ vars.SSH_PORT }}
+        script: |
+          docker-compose up -d --build backend
