@@ -35,4 +35,5 @@ jobs:
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ vars.SSH_PORT }}
         script: |
+          cd /srv/funds-backend
           docker-compose up -d --build backend
