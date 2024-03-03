@@ -27,13 +27,13 @@ jobs:
         push: true
         tags: ${{ vars.DOCKER_REGISTRY_URL }}/${{ vars.DOCKER_REGISTRY_USERNAME }}/backend:latest
 
-    - name: Execute remote SSH commands (rebuild)
-      uses: appleboy/ssh-action@v1.0.3
+    - name: Execute remote SSH cloudflared tunnel commands (rebuild)
+      uses: npgy/cloudflared-ssh-action@v2.0
       with:    
         host: ${{ vars.SSH_IP }}
         username: ${{ vars.SSH_USERNAME }}
-        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ vars.SSH_PORT }}
-        script: |
+        commands: |
           cd /srv/funds-backend
           docker-compose up -d --build backend
