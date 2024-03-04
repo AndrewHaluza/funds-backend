@@ -34,6 +34,4 @@ jobs:
         private_key: ${{ secrets.SSH_PRIVATE_KEY }}
         port: ${{ vars.SSH_PORT }}
         commands: |
-          cd /srv/funds-backend
-          docker pull ${{ vars.DOCKER_REGISTRY_URL }}/funds-backend:latest
-          docker-compose up -d --build backend
+          cd /srv/funds-backend && docker pull ${{ vars.DOCKER_REGISTRY_URL }}/funds-backend:latest && docker-compose up -d backend
