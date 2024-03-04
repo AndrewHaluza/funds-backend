@@ -21,7 +21,7 @@ jobs:
               owner,
               repo,
               head: `${owner}:${refName}`,
-              base: 'dev',
+              base: 'staging',
               state: 'open'
             });
             const prExists = prList.data.length > 0;
