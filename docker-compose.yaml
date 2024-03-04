@@ -4,10 +4,12 @@ services:
     container_name: backend
     image: registry.ndtech.cloud/funds-backend:latest
     restart: always
+    env_file:
+      - .env
     ports:
       - "1337:1337"
     volumes:
-      - .:/app/backend
+      - backend_vol:/app/backend
   frontend:
     container_name: frontend
     image: registry.ndtech.cloud/funds-frontend:latest
@@ -16,4 +18,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/app/frontend
+      - frontend_vol:/app/frontend
+volumes:
+  backend_vol:
+  frontend_vol:
