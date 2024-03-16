@@ -1,11 +1,8 @@
-name: Make Pull Request Action
+name: Make Staging Deploy Pull Request
 on:
   push:
     branches:
-      - feature/*/*
-      - fix/*/*
-      - feature/*
-      - fix/*
+      - dev
 
 env:
   PR_EXISTS: 'false'
@@ -24,7 +21,7 @@ jobs:
               owner,
               repo,
               head: `${owner}:${refName}`,
-              base: 'dev',
+              base: 'staging',
               state: 'open'
             });
             const prExists = prList.data.length > 0;
@@ -46,7 +43,7 @@ jobs:
               owner,
               repo,
               head: `${owner}:${refName}`,
-              base: 'dev',
+              base: 'staging',
               state: 'closed'
             });
 
@@ -70,13 +67,13 @@ jobs:
           script: |
             const { repo, owner } = context.repo;
             const refName = '${{ github.ref_name }}'
-            const prTag = refName.startsWith('fix') ? 'fix': 'feature';
+            const prTag = 'deploy';
             const result = await github.rest.pulls.create({
-              title: `[${prTag.toUpperCase()}] Merge PR ${{ github.ref_name }} to dev`,
+              title: `[Deploy staging] Merge PR ${{ github.ref_name }}`,
               owner,
               repo,
               head: '${{ github.ref_name }}',
-              base: 'dev',
+              base: 'staging',
               body: [].join('\n')
             });
             const labels = [prTag, 'automated pr'];

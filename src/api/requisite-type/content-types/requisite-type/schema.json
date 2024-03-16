@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "requisite_types",
+  "info": {
+    "singularName": "requisite-type",
+    "pluralName": "requisite-types",
+    "displayName": "Requisite Type",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "displayName": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "requisites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::requisite.requisite",
+      "mappedBy": "requisite_type"
+    }
+  }
+}

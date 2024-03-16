@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_requisites_monobankas",
+  "info": {
+    "displayName": "Monobanka",
+    "icon": "plus"
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    }
+  }
+}

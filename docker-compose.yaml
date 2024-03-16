@@ -1,0 +1,16 @@
+version: "3"
+name: funds_local
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "1337:1337"
+    volumes:
+      - backend_vol:/app/backend
+volumes:
+  funds_local-backend_vol:

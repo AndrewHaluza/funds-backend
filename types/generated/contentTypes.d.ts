@@ -573,6 +573,50 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 50;
+      }>;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -678,7 +722,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -707,6 +750,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    organization: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::organization.organization'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -724,43 +772,260 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
   info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
     description: '';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 50;
-      }>;
-    code: Attribute.String & Attribute.Unique;
+    displayName: Attribute.String;
+    icon: Attribute.Media;
+    fund_collections: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    description: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::category.category',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiFundCollectionFundCollection extends Schema.CollectionType {
+  collectionName: 'fund_collections';
+  info: {
+    singularName: 'fund-collection';
+    pluralName: 'fund-collections';
+    displayName: 'Fund Collection';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    organization: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'manyToOne',
+      'api::organization.organization'
+    >;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    totalGoal: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    category: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'manyToOne',
+      'api::category.category'
+    >;
+    collectedAmount: Attribute.Decimal &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Blocks &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    requisites: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'manyToMany',
+      'api::requisite.requisite'
+    >;
+    slug: Attribute.UID<'api::fund-collection.fund-collection', 'title'>;
+    image: Attribute.Media &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    documents: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::fund-collection.fund-collection',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiOrganizationOrganization extends Schema.CollectionType {
+  collectionName: 'organizations';
+  info: {
+    singularName: 'organization';
+    pluralName: 'organizations';
+    displayName: 'Organization';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        minLength: 2;
+        maxLength: 160;
+      }>;
+    image: Attribute.Media;
+    user: Attribute.Relation<
+      'api::organization.organization',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    fund_collections: Attribute.Relation<
+      'api::organization.organization',
+      'oneToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    slug: Attribute.UID<'api::organization.organization', 'name'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::organization.organization',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::organization.organization',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRequisiteRequisite extends Schema.CollectionType {
+  collectionName: 'requisites';
+  info: {
+    singularName: 'requisite';
+    pluralName: 'requisites';
+    displayName: 'Requisite';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    document: Attribute.Media;
+    fund_collections: Attribute.Relation<
+      'api::requisite.requisite',
+      'manyToMany',
+      'api::fund-collection.fund-collection'
+    >;
+    owner: Attribute.String;
+    value: Attribute.String;
+    requisite_type: Attribute.Relation<
+      'api::requisite.requisite',
+      'manyToOne',
+      'api::requisite-type.requisite-type'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::requisite.requisite',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::requisite.requisite',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiRequisiteTypeRequisiteType extends Schema.CollectionType {
+  collectionName: 'requisite_types';
+  info: {
+    singularName: 'requisite-type';
+    pluralName: 'requisite-types';
+    displayName: 'Requisite Type';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    displayName: Attribute.String;
+    icon: Attribute.Media;
+    requisites: Attribute.Relation<
+      'api::requisite-type.requisite-type',
+      'oneToMany',
+      'api::requisite.requisite'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::requisite-type.requisite-type',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::requisite-type.requisite-type',
       'oneToOne',
       'admin::user'
     > &
@@ -782,10 +1047,15 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
+      'api::category.category': ApiCategoryCategory;
+      'api::fund-collection.fund-collection': ApiFundCollectionFundCollection;
+      'api::organization.organization': ApiOrganizationOrganization;
+      'api::requisite.requisite': ApiRequisiteRequisite;
+      'api::requisite-type.requisite-type': ApiRequisiteTypeRequisiteType;
     }
   }
 }
