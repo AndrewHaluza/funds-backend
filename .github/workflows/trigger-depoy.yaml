@@ -1,4 +1,4 @@
-name: Trigger deploy
+name: Make image and trigger deploy
 
 on:
   push:
@@ -9,6 +9,19 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
+      - name: Login to Docker Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.DOCKER_REGISTRY_URL }}
+          username: ${{ vars.DOCKER_REGISTRY_USERNAME }}
+          password: ${{ secrets.DOCKER_REGISTRY_ACCESS_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: ${{ vars.DOCKER_REGISTRY_URL }}/funds-backend:latest
+
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v1
         with:
