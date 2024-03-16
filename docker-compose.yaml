@@ -1,8 +1,10 @@
-version: '3'
+version: "3"
+name: funds_local
 services:
   backend:
     container_name: backend
-    image: registry.ndtech.cloud/funds-backend:latest
+    build:
+      context: .
     restart: always
     env_file:
       - .env
@@ -10,15 +12,5 @@ services:
       - "1337:1337"
     volumes:
       - backend_vol:/app/backend
-  frontend:
-    container_name: frontend
-    image: registry.ndtech.cloud/funds-frontend:latest
-    build: ../donatello/
-    restart: always
-    ports:
-      - "3000:3000"
-    volumes:
-      - frontend_vol:/app/frontend
 volumes:
-  backend_vol:
-  frontend_vol:
+  funds_local-backend_vol:
