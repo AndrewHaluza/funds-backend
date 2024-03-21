@@ -1,15 +1,22 @@
 {
   "name": "funds-backend",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "A Strapi developer"
+  },
   "scripts": {
-    "develop": "strapi develop",
-    "start": "strapi start",
     "build": "strapi build",
+    "build:watch": "strapi develop --watch-admin",
+    "develop": "strapi develop",
+    "dev": "strapi develop",
+    "start": "strapi start",
     "strapi": "strapi"
   },
   "dependencies": {
+    "@strapi/admin": "^4.21.0",
     "@strapi/plugin-cloud": "4.16.2",
     "@strapi/plugin-i18n": "4.16.2",
     "@strapi/plugin-users-permissions": "4.16.2",
@@ -19,17 +26,17 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
+    "strapi-provider-email-smtp": "^1.0.3",
     "styled-components": "5.3.3"
-  },
-  "author": {
-    "name": "A Strapi developer"
-  },
-  "strapi": {
-    "uuid": "baa21d40-04e1-4b46-8b1d-2e5e474f98e8"
   },
   "engines": {
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "baa21d40-04e1-4b46-8b1d-2e5e474f98e8"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.15.2"
+  }
 }

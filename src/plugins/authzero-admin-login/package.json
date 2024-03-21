@@ -1,0 +1,46 @@
+{
+  "name": "authzero-admin-login",
+  "version": "1.0.0",
+  "description": "This is the description of the plugin.",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Haluza",
+    "email": "nd@newerest.space",
+    "url": "https://github.com/AndrewHaluza"
+  },
+  "maintainers": [
+    {
+      "name": "Andrew Haluza",
+      "email": "nd@newerest.space",
+      "url": "https://github.com/AndrewHaluza"
+    }
+  ],
+  "dependencies": {
+    "@strapi/design-system": "^1.6.3",
+    "@strapi/helper-plugin": "^4.6.0",
+    "@strapi/icons": "^1.6.3",
+    "prop-types": "^15.7.2"
+  },
+  "devDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^5.3.4",
+    "styled-components": "^5.3.6"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "name": "authzero-admin-login",
+    "description": "Description of Authzero Admin Login plugin",
+    "kind": "plugin",
+    "displayName": "Authzero Admin Login"
+  }
+}
