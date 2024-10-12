@@ -784,14 +784,15 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    displayName: Attribute.String;
     icon: Attribute.Media;
     fund_collections: Attribute.Relation<
       'api::category.category',
       'oneToMany',
       'api::fund-collection.fund-collection'
     >;
-    description: Attribute.Text;
+    description: Attribute.Component<'localization.description'>;
+    displayName: Attribute.Component<'localization.display-name'>;
+    slug: Attribute.UID & Attribute.Required & Attribute.Private;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -1,5 +1,29 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
+export interface LocalizationDescription extends Schema.Component {
+  collectionName: 'components_localization_descriptions';
+  info: {
+    displayName: 'description';
+    icon: 'quote';
+  };
+  attributes: {
+    uk: Attribute.String;
+    en: Attribute.String;
+  };
+}
+
+export interface LocalizationDisplayName extends Schema.Component {
+  collectionName: 'components_localization_display_names';
+  info: {
+    displayName: 'displayName';
+    icon: '';
+  };
+  attributes: {
+    uk: Attribute.String;
+    en: Attribute.String;
+  };
+}
+
 export interface RequisitesCreditCard extends Schema.Component {
   collectionName: 'components_requisites_credit_cards';
   info: {
@@ -52,6 +76,8 @@ export interface RequisitesRequisites extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
+      'localization.description': LocalizationDescription;
+      'localization.display-name': LocalizationDisplayName;
       'requisites.credit-card': RequisitesCreditCard;
       'requisites.cryptocurrency': RequisitesCryptocurrency;
       'requisites.monobanka': RequisitesMonobanka;
