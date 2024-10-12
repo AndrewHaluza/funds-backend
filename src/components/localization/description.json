@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_localization_descriptions",
+  "info": {
+    "displayName": "description",
+    "icon": "quote"
+  },
+  "options": {},
+  "attributes": {
+    "uk": {
+      "type": "string"
+    },
+    "en": {
+      "type": "string"
+    }
+  }
+}

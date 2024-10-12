@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_localization_display_names",
+  "info": {
+    "displayName": "displayName",
+    "icon": ""
+  },
+  "options": {},
+  "attributes": {
+    "uk": {
+      "type": "string"
+    },
+    "en": {
+      "type": "string"
+    }
+  }
+}
