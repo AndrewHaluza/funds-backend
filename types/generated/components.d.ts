@@ -1,26 +1,38 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface LocalizationDescription extends Schema.Component {
-  collectionName: 'components_localization_descriptions';
+export interface RequisitesRequisites extends Schema.Component {
+  collectionName: 'components_requisites_requisites';
   info: {
-    displayName: 'description';
-    icon: 'quote';
+    displayName: 'IBAN';
+    icon: 'plus';
+    description: '';
   };
   attributes: {
-    uk: Attribute.String;
-    en: Attribute.String;
+    bankDisplayName: Attribute.String;
+    IBAN: Attribute.String;
   };
 }
 
-export interface LocalizationDisplayName extends Schema.Component {
-  collectionName: 'components_localization_display_names';
+export interface RequisitesMonobanka extends Schema.Component {
+  collectionName: 'components_requisites_monobankas';
   info: {
-    displayName: 'displayName';
-    icon: '';
+    displayName: 'Monobanka';
+    icon: 'plus';
   };
   attributes: {
-    uk: Attribute.String;
-    en: Attribute.String;
+    link: Attribute.String;
+  };
+}
+
+export interface RequisitesCryptocurrency extends Schema.Component {
+  collectionName: 'components_requisites_cryptocurrencies';
+  info: {
+    displayName: 'Cryptocurrency';
+    icon: 'plus';
+  };
+  attributes: {
+    cryptocurrencyDisplayName: Attribute.String;
+    walletAddress: Attribute.String;
   };
 }
 
@@ -37,51 +49,39 @@ export interface RequisitesCreditCard extends Schema.Component {
   };
 }
 
-export interface RequisitesCryptocurrency extends Schema.Component {
-  collectionName: 'components_requisites_cryptocurrencies';
+export interface LocalizationDisplayName extends Schema.Component {
+  collectionName: 'components_localization_display_names';
   info: {
-    displayName: 'Cryptocurrency';
-    icon: 'plus';
+    displayName: 'displayName';
+    icon: '';
   };
   attributes: {
-    cryptocurrencyDisplayName: Attribute.String;
-    walletAddress: Attribute.String;
+    uk: Attribute.String;
+    en: Attribute.String;
   };
 }
 
-export interface RequisitesMonobanka extends Schema.Component {
-  collectionName: 'components_requisites_monobankas';
+export interface LocalizationDescription extends Schema.Component {
+  collectionName: 'components_localization_descriptions';
   info: {
-    displayName: 'Monobanka';
-    icon: 'plus';
+    displayName: 'description';
+    icon: 'quote';
   };
   attributes: {
-    link: Attribute.String;
-  };
-}
-
-export interface RequisitesRequisites extends Schema.Component {
-  collectionName: 'components_requisites_requisites';
-  info: {
-    displayName: 'IBAN';
-    icon: 'plus';
-    description: '';
-  };
-  attributes: {
-    bankDisplayName: Attribute.String;
-    IBAN: Attribute.String;
+    uk: Attribute.String;
+    en: Attribute.String;
   };
 }
 
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'localization.description': LocalizationDescription;
-      'localization.display-name': LocalizationDisplayName;
-      'requisites.credit-card': RequisitesCreditCard;
-      'requisites.cryptocurrency': RequisitesCryptocurrency;
-      'requisites.monobanka': RequisitesMonobanka;
       'requisites.requisites': RequisitesRequisites;
+      'requisites.monobanka': RequisitesMonobanka;
+      'requisites.cryptocurrency': RequisitesCryptocurrency;
+      'requisites.credit-card': RequisitesCreditCard;
+      'localization.display-name': LocalizationDisplayName;
+      'localization.description': LocalizationDescription;
     }
   }
 }
