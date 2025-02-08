@@ -12,16 +12,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "displayName": {
-      "type": "string"
-    },
     "icon": {
       "type": "media",
       "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
-      ]
+      ],
+      "pluginOptions": {}
     },
     "fund_collections": {
       "type": "relation",
@@ -30,7 +28,19 @@
       "mappedBy": "category"
     },
     "description": {
-      "type": "text"
+      "displayName": "description",
+      "type": "component",
+      "repeatable": false,
+      "component": "localization.description"
+    },
+    "displayName": {
+      "type": "component",
+      "repeatable": false,
+      "component": "localization.display-name"
+    },
+    "slug": {
+      "type": "uid",
+      "required": true
     }
   }
 }
