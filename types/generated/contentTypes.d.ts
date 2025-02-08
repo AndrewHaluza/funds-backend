@@ -812,7 +812,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     >;
     description: Attribute.Component<'localization.description'>;
     displayName: Attribute.Component<'localization.display-name'>;
-    slug: Attribute.UID & Attribute.Required & Attribute.Private;
+    slug: Attribute.UID & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
