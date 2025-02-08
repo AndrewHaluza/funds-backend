@@ -40,8 +40,7 @@
     },
     "slug": {
       "type": "uid",
-      "required": true,
-      "private": true
+      "required": true
     }
   }
 }
